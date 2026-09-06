@@ -12,7 +12,10 @@
 
     <title>Keuangan OSIS</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -29,7 +32,14 @@
 
 <body>
 
-    <div id="loginModal" class="login-modal">
+
+<!-- LOGIN -->
+
+<div
+    id="loginModal"
+    class="login-modal"
+>
+
     <div class="login-box">
 
         <button
@@ -40,40 +50,69 @@
             ×
         </button>
 
-        <h2>Login Admin</h2>
-        <p>Login untuk mengelola transaksi.</p>
+
+        <h2>
+            Login Admin
+        </h2>
+
+
+        <p>
+            Login untuk mengelola transaksi.
+        </p>
+
 
         <form id="loginForm">
 
-            <label>Username</label>
+            <label>
+                Username
+            </label>
+
             <input
                 type="text"
                 id="username"
                 required
             >
 
-            <label>Password</label>
+
+            <label>
+                Password
+            </label>
+
             <input
                 type="password"
                 id="password"
                 required
             >
 
+
             <button type="submit">
+
                 <i class="fa-solid fa-right-to-bracket"></i>
+
                 Login
+
             </button>
 
         </form>
 
     </div>
+
 </div>
 
+
+
+<!-- HEADER -->
+
 <header>
+
     <h2>
+
         <i class="fa-solid fa-wallet"></i>
+
         Keuangan OSIS
+
     </h2>
+
 
     <button
         type="button"
@@ -81,10 +120,16 @@
         class="login-button"
         onclick="bukaLogin()"
     >
+
         <i class="fa-solid fa-lock"></i>
+
         Login Admin
+
     </button>
+
 </header>
+
+
 
 <div class="container">
 
@@ -95,7 +140,9 @@
 
         <div class="card saldo">
 
-            <h3>Saldo</h3>
+            <h3>
+                Saldo
+            </h3>
 
             <h1 id="saldo">
                 Rp 0
@@ -107,12 +154,17 @@
 
 
 
-    <!-- FORM -->
+    <!-- INPUT TRANSAKSI -->
 
-    <div class="form-box" 
-    id="formTransaksiBox">
+    <div
+        class="form-box"
+        id="formTransaksiBox"
+    >
 
-        <h2>Input Transaksi</h2>
+        <h2>
+            Input Transaksi
+        </h2>
+
 
         <form id="formKeuangan">
 
@@ -126,7 +178,6 @@
                 id="tanggal"
                 required
             >
-
 
 
             <label for="jenis">
@@ -146,7 +197,6 @@
             </select>
 
 
-
             <label for="nominal">
                 Nominal (Rp)
             </label>
@@ -160,7 +210,6 @@
             >
 
 
-
             <label for="keterangan">
                 Keterangan
             </label>
@@ -170,7 +219,6 @@
                 placeholder="Masukkan keterangan..."
                 required
             ></textarea>
-
 
 
             <button
@@ -184,7 +232,6 @@
 
             </button>
 
-
         </form>
 
     </div>
@@ -195,10 +242,85 @@
 
     <div class="table-box">
 
-        <h2>
-            Riwayat Transaksi
-        </h2>
 
+        <div class="table-header">
+
+            <h2>
+                Riwayat Transaksi
+            </h2>
+
+
+            <!-- FILTER BULAN -->
+
+            <div class="filter-box">
+
+                <label for="filterBulan">
+                    Filter Bulan
+                </label>
+
+                <select id="filterBulan">
+
+                    <option value="all">
+                        Semua Bulan
+                    </option>
+
+                    <option value="0">
+                        Januari
+                    </option>
+
+                    <option value="1">
+                        Februari
+                    </option>
+
+                    <option value="2">
+                        Maret
+                    </option>
+
+                    <option value="3">
+                        April
+                    </option>
+
+                    <option value="4">
+                        Mei
+                    </option>
+
+                    <option value="5">
+                        Juni
+                    </option>
+
+                    <option value="6">
+                        Juli
+                    </option>
+
+                    <option value="7">
+                        Agustus
+                    </option>
+
+                    <option value="8">
+                        September
+                    </option>
+
+                    <option value="9">
+                        Oktober
+                    </option>
+
+                    <option value="10">
+                        November
+                    </option>
+
+                    <option value="11">
+                        Desember
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TABEL -->
 
         <table>
 
@@ -206,17 +328,29 @@
 
                 <tr>
 
-                    <th>No</th>
+                    <th>
+                        No
+                    </th>
 
-                    <th>Tanggal</th>
+                    <th>
+                        Tanggal
+                    </th>
 
-                    <th>Keterangan</th>
+                    <th>
+                        Keterangan
+                    </th>
 
-                    <th>Pemasukan</th>
+                    <th>
+                        Pemasukan
+                    </th>
 
-                    <th>Pengeluaran</th>
+                    <th>
+                        Pengeluaran
+                    </th>
 
-                    <th>Saldo</th>
+                    <th>
+                        Saldo
+                    </th>
 
                 </tr>
 
@@ -239,11 +373,12 @@
 
     </div>
 
-
 </div>
 
 
+
 <script src="script.js"></script>
+
 
 </body>
 

@@ -186,18 +186,18 @@ button:disabled{
 table{
     width:100%;
     border-collapse:collapse;
-    font-size:12px;
+    font-size:14px;
 }
 
 th{
     background:#eb7df5;
     color:white;
-    padding:8px 7px;
+    padding:12px 10px;
     white-space:nowrap;
 }
 
 td{
-    padding:8px 7px;
+    padding:11px 10px;
     text-align:center;
     border-bottom:1px solid #ddd;
     white-space:nowrap;

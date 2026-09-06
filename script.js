@@ -567,32 +567,67 @@ function tampilkanData() {
 
     // FILTER BULAN
 
-    if (filter !== "all") {
+  if (filter !== "all") {
 
-        const bulan =
-            Number(filter);
+    const periode =
+        Number(filter);
 
+    dataTampil =
+        semuaData.filter(row => {
 
-        dataTampil =
-            semuaData.filter(
-                row => {
+            if (!row[0]) {
+                return false;
+            }
 
-                    if (!row[0]) {
-                        return false;
-                    }
+            const tanggal =
+                new Date(row[0]);
 
+            if (isNaN(tanggal)) {
+                return false;
+            }
 
-                    const tanggal =
-                        new Date(row[0]);
+            const tahun =
+                tanggal.getFullYear();
 
+            const bulan =
+                tanggal.getMonth();
 
-                    return (
-                        tanggal.getMonth() ===
-                        bulan
-                    );
-                }
-            );
-    }
+            /*
+             * Periode OSIS:
+             * 0  = September 2026
+             * 1  = Oktober 2026
+             * 2  = November 2026
+             * 3  = Desember 2026
+             * 4  = Januari 2027
+             * ...
+             * 11 = Agustus 2027
+             */
+
+            let periodeTanggal;
+
+            if (
+                tahun === 2026 &&
+                bulan >= 8
+            ) {
+                // September - Desember 2026
+                periodeTanggal =
+                    bulan - 8;
+
+            } else if (
+                tahun === 2027 &&
+                bulan <= 7
+            ) {
+                // Januari - Agustus 2027
+                periodeTanggal =
+                    bulan + 4;
+
+            } else {
+                return false;
+            }
+
+            return periodeTanggal === periode;
+        });
+}
 
 
     // TIDAK ADA DATA BULAN TERSEBUT

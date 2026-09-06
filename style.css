@@ -151,32 +151,29 @@ button:hover{
 .table-header{
     display:flex;
     justify-content:space-between;
-    align-items:flex-end;
-    gap:20px;
+    align-items:center;
+    gap:15px;
     margin-bottom:20px;
 }
 
-
 .table-header h2{
-    margin-bottom:0;
+    margin:0;
 }
-
 
 .filter-box{
-    width:clamp(180px, 25%, 260px);
-    flex-shrink:1;
+    width:150px;
+    flex-shrink:0;
 }
-
 
 .filter-box label{
     margin:0 0 5px 0;
-    font-size:14px;
+    font-size:13px;
 }
-
 
 .filter-box select{
     width:100%;
-    padding:10px 12px;
+    padding:9px 10px;
+    font-size:13px;
 }
 
 
@@ -229,12 +226,7 @@ tr:hover{
         flex-direction:column;
         align-items:stretch;
     }
-
-
-    .filter-box{
-        width:100%;
-    }
-
+    
 
     .table-box{
         overflow-x:auto;

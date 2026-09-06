@@ -1,20 +1,6 @@
 const WEB_APP_URL =
     "https://script.google.com/macros/s/AKfycbzypxg2ti_YBkUhR1nfkan9yoOMOXx4ZGuIGzNdTgDT58csVgWlxtBFl5meegENrJbhKQ/exec";
 
-const loginModal =
-    document.getElementById("loginModal");
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const formTransaksiBox =
-    document.getElementById("formTransaksiBox");
-
-const loginButton =
-    document.getElementById("loginButton");
-
-let adminToken =
-    sessionStorage.getItem("adminToken");
 
 const form =
     document.getElementById("formKeuangan");
@@ -31,44 +17,125 @@ const nominalInput =
 const submitButton =
     document.getElementById("submitButton");
 
+const loginModal =
+    document.getElementById("loginModal");
 
-function bukaLogin() {
-    loginModal.style.display = "flex";
-}
+const loginForm =
+    document.getElementById("loginForm");
 
-function tutupLogin() {
-    loginModal.style.display = "none";
-}
+const formTransaksiBox =
+    document.getElementById("formTransaksiBox");
 
-function updateLoginUI() {
+const loginButton =
+    document.getElementById("loginButton");
 
-    if (adminToken) {
+const filterBulan =
+    document.getElementById("filterBulan");
 
-        formTransaksiBox.style.display = "block";
 
-        loginButton.innerHTML =
-            '<i class="fa-solid fa-right-from-bracket"></i> Logout';
+let adminToken =
+    sessionStorage.getItem("adminToken");
 
-        loginButton.onclick = logoutAdmin;
 
-    } else {
+let semuaData = [];
 
-        formTransaksiBox.style.display = "none";
 
-        loginButton.innerHTML =
-            '<i class="fa-solid fa-lock"></i> Login Admin';
-
-        loginButton.onclick = bukaLogin;
-    }
-}
+// =========================
+// FORMAT RUPIAH
+// =========================
 
 function formatRupiah(angka) {
 
     return "Rp " +
         Number(angka || 0)
             .toLocaleString("id-ID");
-
 }
+
+
+// =========================
+// FORMAT TANGGAL
+// =========================
+
+function formatTanggal(value) {
+
+    if (!value) {
+        return "-";
+    }
+
+    const tanggal =
+        new Date(value);
+
+    if (isNaN(tanggal)) {
+        return value;
+    }
+
+    return tanggal.toLocaleDateString(
+        "id-ID",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }
+    );
+}
+
+
+// =========================
+// UPDATE LOGIN
+// =========================
+
+function updateLoginUI() {
+
+    if (adminToken) {
+
+        formTransaksiBox.style.display =
+            "block";
+
+        loginButton.innerHTML =
+            '<i class="fa-solid fa-right-from-bracket"></i> Logout';
+
+        loginButton.onclick =
+            logoutAdmin;
+
+    } else {
+
+        formTransaksiBox.style.display =
+            "none";
+
+        loginButton.innerHTML =
+            '<i class="fa-solid fa-lock"></i> Login Admin';
+
+        loginButton.onclick =
+            bukaLogin;
+    }
+}
+
+
+// =========================
+// BUKA LOGIN
+// =========================
+
+function bukaLogin() {
+
+    loginModal.style.display =
+        "flex";
+}
+
+
+// =========================
+// TUTUP LOGIN
+// =========================
+
+function tutupLogin() {
+
+    loginModal.style.display =
+        "none";
+}
+
+
+// =========================
+// LOGIN
+// =========================
 
 loginForm.addEventListener(
     "submit",
@@ -76,175 +143,29 @@ loginForm.addEventListener(
 
         e.preventDefault();
 
+
         const username =
-            document.getElementById("username").value.trim();
-
-        const password =
-            document.getElementById("password").value;
-
-        try {
-
-            const response =
-                await fetch(
-                    WEB_APP_URL,
-                    {
-                        method: "POST",
-                        body: JSON.stringify({
-                            action: "login",
-                            username: username,
-                            password: password
-                        })
-                    }
-                );
-
-            const result =
-                await response.json();
-
-            if (!result.success) {
-                alert(result.message);
-                return;
-            }
-
-            adminToken = result.token;
-
-            sessionStorage.setItem(
-                "adminToken",
-                adminToken
-            );
-
-            loginForm.reset();
-
-            tutupLogin();
-
-            updateLoginUI();
-
-            alert("Login admin berhasil.");
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert("Login gagal. Periksa koneksi.");
-
-        }
-    }
-);
-
-function logoutAdmin() {
-
-    sessionStorage.removeItem("adminToken");
-
-    adminToken = null;
-
-    updateLoginUI();
-
-    alert("Anda telah logout.");
-}
-
-// ==============================
-// FORMAT INPUT NOMINAL
-// ==============================
-
-nominalInput.addEventListener(
-    "input",
-    function () {
-
-        let angka =
-            this.value.replace(/\D/g, "");
-
-        if (angka === "") {
-
-            this.value = "";
-
-            return;
-        }
-
-        this.value =
-            Number(angka)
-                .toLocaleString("id-ID");
-
-    }
-);
-
-
-// ==============================
-// SUBMIT TRANSAKSI
-// ==============================
-
-form.addEventListener(
-    "submit",
-    async function (e) {
-
-        e.preventDefault();
-
-
-        const tanggal =
-            document.getElementById("tanggal").value;
-
-        const jenis =
-            document.getElementById("jenis").value;
-
-        const nominal =
-            Number(
-                nominalInput.value
-                    .replace(/\./g, "")
-            );
-
-        const keterangan =
             document
-                .getElementById("keterangan")
+                .getElementById("username")
                 .value
                 .trim();
 
 
-        // Validasi
-
-        if (!tanggal) {
-
-            alert("Tanggal harus diisi.");
-
-            return;
-        }
+        const password =
+            document
+                .getElementById("password")
+                .value;
 
 
-        if (!nominal || nominal <= 0) {
-
-            alert("Nominal harus lebih dari 0.");
-
-            return;
-        }
+        const button =
+            loginForm.querySelector("button");
 
 
-        if (!keterangan) {
-
-            alert("Keterangan harus diisi.");
-
-            return;
-        }
+        button.disabled = true;
 
 
-        let pemasukan = 0;
-
-        let pengeluaran = 0;
-
-
-        if (jenis === "Pemasukan") {
-
-            pemasukan = nominal;
-
-        } else {
-
-            pengeluaran = nominal;
-
-        }
-
-
-        // Ubah tombol menjadi loading
-
-        submitButton.disabled = true;
-
-        submitButton.innerHTML =
-            '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+        button.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Memeriksa...';
 
 
         try {
@@ -253,22 +174,17 @@ form.addEventListener(
                 await fetch(
                     WEB_APP_URL,
                     {
-                        method: "POST",
+                        method:"POST",
 
-                        body: JSON.stringify({
+                        body:JSON.stringify({
 
-                            tanggal:
-                                tanggal,
+                            action:"login",
 
-                            keterangan:
-                                keterangan,
+                            username:
+                                username,
 
-                            pemasukan:
-                                pemasukan,
-
-                            pengeluaran:
-                                pengeluaran
-
+                            password:
+                                password
                         })
                     }
                 );
@@ -282,51 +198,583 @@ form.addEventListener(
 
                 throw new Error(
                     result.message ||
-                    "Gagal menyimpan data."
+                    "Login gagal."
                 );
-
             }
 
 
-            alert("Transaksi berhasil disimpan.");
+            adminToken =
+                result.token;
 
 
-            // Reset form
-
-            form.reset();
-
-
-            // Ambil ulang data
-            // dari Google Sheets
-
-            await ambilData();
+            sessionStorage.setItem(
+                "adminToken",
+                adminToken
+            );
 
 
-        } catch (error) {
+            loginForm.reset();
 
-            console.error(error);
+            tutupLogin();
+
+            updateLoginUI();
+
 
             alert(
-                "Gagal menyimpan transaksi.\n\n" +
-                error.message
+                "Login admin berhasil."
             );
+
+
+        } catch(error) {
+
+            console.error(
+                "Login error:",
+                error
+            );
+
+
+            alert(
+                error.message ||
+                "Login gagal."
+            );
+
 
         } finally {
 
-            submitButton.disabled = false;
+            button.disabled =
+                false;
 
-            submitButton.innerHTML =
-                '<i class="fa-solid fa-plus"></i> Tambah Data';
 
+            button.innerHTML =
+                '<i class="fa-solid fa-right-to-bracket"></i> Login';
         }
-
     }
 );
 
 
-// ==============================
-// AMBIL DATA
-// ==============================
+// =========================
+// LOGOUT
+// =========================
+
+function logoutAdmin() {
+
+    sessionStorage.removeItem(
+        "adminToken"
+    );
+
+    adminToken = null;
+
+    updateLoginUI();
+
+    alert(
+        "Anda telah logout."
+    );
+}
+
+
+// =========================
+// FORMAT NOMINAL
+// =========================
+
+nominalInput.addEventListener(
+    "input",
+    function() {
+
+        let angka =
+            this.value.replace(
+                /\D/g,
+                ""
+            );
+
+
+        if (angka === "") {
+
+            this.value = "";
+
+            return;
+        }
+
+
+        this.value =
+            Number(angka)
+                .toLocaleString("id-ID");
+    }
+);
+
+
+// =========================
+// TAMBAH TRANSAKSI
+// =========================
+
+form.addEventListener(
+    "submit",
+    async function(e) {
+
+        e.preventDefault();
+
+
+        if (!adminToken) {
+
+            alert(
+                "Silakan login sebagai admin terlebih dahulu."
+            );
+
+            bukaLogin();
+
+            return;
+        }
+
+
+        const tanggal =
+            document
+                .getElementById("tanggal")
+                .value;
+
+
+        const jenis =
+            document
+                .getElementById("jenis")
+                .value;
+
+
+        const nominal =
+            Number(
+                nominalInput.value
+                    .replace(/\./g, "")
+            );
+
+
+        const keterangan =
+            document
+                .getElementById("keterangan")
+                .value
+                .trim();
+
+
+        if (!tanggal) {
+
+            alert(
+                "Tanggal harus diisi."
+            );
+
+            return;
+        }
+
+
+        if (
+            !nominal ||
+            nominal <= 0
+        ) {
+
+            alert(
+                "Nominal harus lebih dari 0."
+            );
+
+            return;
+        }
+
+
+        if (!keterangan) {
+
+            alert(
+                "Keterangan harus diisi."
+            );
+
+            return;
+        }
+
+
+        let pemasukan = 0;
+
+        let pengeluaran = 0;
+
+
+        if (
+            jenis === "Pemasukan"
+        ) {
+
+            pemasukan =
+                nominal;
+
+        } else {
+
+            pengeluaran =
+                nominal;
+        }
+
+
+        submitButton.disabled =
+            true;
+
+
+        submitButton.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+
+
+        try {
+
+            const response =
+                await fetch(
+                    WEB_APP_URL,
+                    {
+                        method:"POST",
+
+                        body:JSON.stringify({
+
+                            action:
+                                "transaksi",
+
+                            token:
+                                adminToken,
+
+                            tanggal:
+                                tanggal,
+
+                            keterangan:
+                                keterangan,
+
+                            pemasukan:
+                                pemasukan,
+
+                            pengeluaran:
+                                pengeluaran
+                        })
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            console.log(
+                "Response transaksi:",
+                result
+            );
+
+
+            if (!result.success) {
+
+                if (
+                    result.message ===
+                    "Anda harus login sebagai admin."
+                ) {
+
+                    sessionStorage.removeItem(
+                        "adminToken"
+                    );
+
+                    adminToken = null;
+
+                    updateLoginUI();
+                }
+
+
+                throw new Error(
+                    result.message ||
+                    "Gagal menyimpan transaksi."
+                );
+            }
+
+
+            alert(
+                "Transaksi berhasil disimpan."
+            );
+
+
+            form.reset();
+
+
+            await ambilData();
+
+
+        } catch(error) {
+
+            console.error(
+                "Transaksi error:",
+                error
+            );
+
+
+            alert(
+                error.message ||
+                "Gagal menyimpan transaksi."
+            );
+
+
+        } finally {
+
+            submitButton.disabled =
+                false;
+
+
+            submitButton.innerHTML =
+                '<i class="fa-solid fa-plus"></i> Tambah Data';
+        }
+    }
+);
+
+
+// =========================
+// FILTER BULAN
+// =========================
+
+filterBulan.addEventListener(
+    "change",
+    function() {
+
+        tampilkanData();
+    }
+);
+
+
+// =========================
+// TAMPILKAN DATA
+// =========================
+
+function tampilkanData() {
+
+    tbody.innerHTML = "";
+
+
+    if (
+        semuaData.length === 0
+    ) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    Belum ada transaksi.
+                </td>
+            </tr>
+        `;
+
+
+        saldoEl.innerText =
+            formatRupiah(0);
+
+        return;
+    }
+
+
+    const filter =
+        filterBulan.value;
+
+
+    let dataTampil =
+        semuaData;
+
+
+    // FILTER BULAN
+
+    if (filter !== "all") {
+
+        const bulan =
+            Number(filter);
+
+
+        dataTampil =
+            semuaData.filter(
+                row => {
+
+                    if (!row[0]) {
+                        return false;
+                    }
+
+
+                    const tanggal =
+                        new Date(row[0]);
+
+
+                    return (
+                        tanggal.getMonth() ===
+                        bulan
+                    );
+                }
+            );
+    }
+
+
+    // TIDAK ADA DATA BULAN TERSEBUT
+
+    if (
+        dataTampil.length === 0
+    ) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    Tidak ada transaksi pada bulan ini.
+                </td>
+            </tr>
+        `;
+
+
+        // Saldo keseluruhan tetap ditampilkan
+
+        const saldoTerakhir =
+            Number(
+                semuaData[
+                    semuaData.length - 1
+                ][4]
+            ) || 0;
+
+
+        saldoEl.innerText =
+            formatRupiah(
+                saldoTerakhir
+            );
+
+        return;
+    }
+
+
+    let nomor = 1;
+
+
+    dataTampil.forEach(
+        row => {
+
+            const tanggal =
+                formatTanggal(
+                    row[0]
+                );
+
+
+            const keterangan =
+                row[1] || "";
+
+
+            const pemasukan =
+                Number(row[2]) || 0;
+
+
+            const pengeluaran =
+                Number(row[3]) || 0;
+
+
+            const saldoData =
+                Number(row[4]) || 0;
+
+
+            const baris =
+                document.createElement(
+                    "tr"
+                );
+
+
+            // NO
+
+            baris.insertCell()
+                .innerText =
+                nomor;
+
+
+            // TANGGAL
+
+            baris.insertCell()
+                .innerText =
+                tanggal;
+
+
+            // KETERANGAN
+
+            baris.insertCell()
+                .innerText =
+                keterangan;
+
+
+            // PEMASUKAN
+
+            const masukCell =
+                baris.insertCell();
+
+
+            if (
+                pemasukan > 0
+            ) {
+
+                masukCell.innerText =
+                    formatRupiah(
+                        pemasukan
+                    );
+
+                masukCell.classList.add(
+                    "pemasukan-text"
+                );
+
+            } else {
+
+                masukCell.innerText =
+                    "-";
+            }
+
+
+            // PENGELUARAN
+
+            const keluarCell =
+                baris.insertCell();
+
+
+            if (
+                pengeluaran > 0
+            ) {
+
+                keluarCell.innerText =
+                    formatRupiah(
+                        pengeluaran
+                    );
+
+                keluarCell.classList.add(
+                    "pengeluaran-text"
+                );
+
+            } else {
+
+                keluarCell.innerText =
+                    "-";
+            }
+
+
+            // SALDO
+
+            baris.insertCell()
+                .innerText =
+                formatRupiah(
+                    saldoData
+                );
+
+
+            tbody.appendChild(
+                baris
+            );
+
+
+            nomor++;
+        }
+    );
+
+
+    // SALDO KESELURUHAN
+
+    const saldoTerakhir =
+        Number(
+            semuaData[
+                semuaData.length - 1
+            ][4]
+        ) || 0;
+
+
+    saldoEl.innerText =
+        formatRupiah(
+            saldoTerakhir
+        );
+}
+
+
+// =========================
+// AMBIL DATA DARI SHEET
+// =========================
 
 async function ambilData() {
 
@@ -342,174 +790,40 @@ async function ambilData() {
     try {
 
         const response =
-            await fetch(WEB_APP_URL);
+            await fetch(
+                WEB_APP_URL
+            );
 
 
         const data =
             await response.json();
 
 
-        if (!Array.isArray(data)) {
+        console.log(
+            "Data dari server:",
+            data
+        );
+
+
+        if (
+            !Array.isArray(data)
+        ) {
 
             throw new Error(
                 data.message ||
                 "Format data tidak valid."
             );
-
         }
 
 
-        // Kosongkan tabel
+        semuaData =
+            data;
 
-        tbody.innerHTML = "";
 
+        tampilkanData();
 
-        // Belum ada transaksi
 
-        if (data.length === 0) {
-
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="6">
-                        Belum ada transaksi.
-                    </td>
-                </tr>
-            `;
-
-            saldoEl.innerText =
-                formatRupiah(0);
-
-            return;
-        }
-
-
-        let nomor = 1;
-
-        let saldoTerakhir = 0;
-
-
-        data.forEach(row => {
-
-            const tanggal =
-                formatTanggal(row[0]);
-
-            const keterangan =
-                row[1] || "";
-
-            const pemasukan =
-                Number(row[2]) || 0;
-
-            const pengeluaran =
-                Number(row[3]) || 0;
-
-            const saldoData =
-                Number(row[4]) || 0;
-
-
-            saldoTerakhir =
-                saldoData;
-
-
-            const baris =
-                document.createElement("tr");
-
-
-            // No
-
-            const nomorCell =
-                baris.insertCell();
-
-            nomorCell.innerText =
-                nomor;
-
-
-            // Tanggal
-
-            const tanggalCell =
-                baris.insertCell();
-
-            tanggalCell.innerText =
-                tanggal;
-
-
-            // Keterangan
-
-            const keteranganCell =
-                baris.insertCell();
-
-            keteranganCell.innerText =
-                keterangan;
-
-
-            // Pemasukan
-
-            const masukCell =
-                baris.insertCell();
-
-
-            if (pemasukan > 0) {
-
-                masukCell.innerText =
-                    formatRupiah(pemasukan);
-
-                masukCell.classList.add(
-                    "pemasukan-text"
-                );
-
-            } else {
-
-                masukCell.innerText = "-";
-
-            }
-
-
-            // Pengeluaran
-
-            const keluarCell =
-                baris.insertCell();
-
-
-            if (pengeluaran > 0) {
-
-                keluarCell.innerText =
-                    formatRupiah(pengeluaran);
-
-                keluarCell.classList.add(
-                    "pengeluaran-text"
-                );
-
-            } else {
-
-                keluarCell.innerText = "-";
-
-            }
-
-
-            // Saldo
-
-            const saldoCell =
-                baris.insertCell();
-
-
-            saldoCell.innerText =
-                formatRupiah(saldoData);
-
-
-            tbody.appendChild(baris);
-
-
-            nomor++;
-
-        });
-
-
-        // Update saldo
-
-        saldoEl.innerText =
-            formatRupiah(saldoTerakhir);
-
-
-    } catch (error) {
+    } catch(error) {
 
         console.error(
             "Gagal mengambil data:",
@@ -524,55 +838,20 @@ async function ambilData() {
                 </td>
             </tr>
         `;
-
     }
-
 }
 
 
-// ==============================
-// FORMAT TANGGAL
-// ==============================
-
-function formatTanggal(value) {
-
-    if (!value) {
-        return "-";
-    }
-
-
-    const tanggal =
-        new Date(value);
-
-
-    if (isNaN(tanggal)) {
-        return value;
-    }
-
-
-    return tanggal.toLocaleDateString(
-        "id-ID",
-        {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-        }
-    );
-
-}
-
-
-// ==============================
-// JALANKAN SAAT HALAMAN DIBUKA
-// ==============================
+// =========================
+// SAAT WEBSITE DIBUKA
+// =========================
 
 window.addEventListener(
     "load",
-    function () {
+    function() {
 
         updateLoginUI();
 
         ambilData();
-
     }
 );

@@ -34,7 +34,7 @@ header h2{
 
 .container{
     width:90%;
-    max-width:1200px;
+    max-width:1000px;
     margin:30px auto;
 }
 
@@ -54,6 +54,11 @@ header h2{
     padding:25px;
     text-align:center;
     box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
 }
 
 .card h3{
@@ -76,11 +81,15 @@ header h2{
 ========================= */
 
 .form-box{
+    width:100%;
+    max-width:1000px;
+    margin:0 auto 30px;
+
     background:white;
     padding:25px;
     border-radius:15px;
+
     box-shadow:0 8px 20px rgba(0,0,0,.08);
-    margin-bottom:30px;
 }
 
 .form-box h2{
@@ -99,10 +108,21 @@ select,
 textarea{
     width:100%;
     padding:12px;
+
     border:1px solid #ccc;
     border-radius:10px;
+
     outline:none;
     font-size:15px;
+
+    transition:.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#eb7df5;
+    box-shadow:0 0 0 3px rgba(235,125,245,.12);
 }
 
 textarea{
@@ -114,17 +134,29 @@ button{
     width:100%;
     margin-top:20px;
     padding:14px;
+
     border:none;
     border-radius:10px;
+
     background:#eb7df5;
     color:white;
+
     font-size:16px;
     cursor:pointer;
+
+    transition:.2s;
+}
+
+button:hover{
+    background:#eb7df5;
+    transform:translateY(-1px);
+    box-shadow:0 5px 12px rgba(235,125,245,.25);
 }
 
 button:disabled{
     opacity:.7;
     cursor:not-allowed;
+    transform:none;
 }
 
 /* =========================
@@ -132,23 +164,27 @@ button:disabled{
 ========================= */
 
 .table-box{
+    width:100%;
+    max-width:1000px;
+    margin:0 auto 30px;
+
     background:white;
     padding:20px;
+
     border-radius:15px;
+
     box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-    /* dibuat lebih kecil */
-    width:100%;
-    max-width:950px;
-    margin:0 auto;
-
-    overflow-x:auto;
 }
 
+/* HEADER TABEL */
+
 .table-header{
+    width:100%;
+
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    align-items:flex-end;
+
     gap:15px;
     margin-bottom:15px;
 }
@@ -170,37 +206,91 @@ button:disabled{
 .filter-box label{
     margin:0 0 4px 0;
     font-size:12px;
+    font-weight:600;
 }
 
 .filter-box select{
     width:120px;
     padding:7px 8px;
+
     font-size:12px;
     border-radius:8px;
 }
 
 /* =========================
-   ISI TABEL
+   TABEL
 ========================= */
 
 table{
     width:100%;
+
     border-collapse:collapse;
+
+    table-layout:fixed;
+
     font-size:14px;
 }
+
+/* UKURAN KOLOM */
+
+table th:nth-child(1),
+table td:nth-child(1){
+    width:6%;
+}
+
+table th:nth-child(2),
+table td:nth-child(2){
+    width:16%;
+}
+
+table th:nth-child(3),
+table td:nth-child(3){
+    width:28%;
+}
+
+table th:nth-child(4),
+table td:nth-child(4){
+    width:17%;
+}
+
+table th:nth-child(5),
+table td:nth-child(5){
+    width:17%;
+}
+
+table th:nth-child(6),
+table td:nth-child(6){
+    width:16%;
+}
+
+/* HEADER TABEL */
 
 th{
     background:#eb7df5;
     color:white;
-    padding:12px 10px;
+
+    padding:12px 8px;
+
     white-space:nowrap;
 }
 
+/* ISI TABEL */
+
 td{
-    padding:11px 10px;
+    padding:10px 8px;
+
     text-align:center;
+
     border-bottom:1px solid #ddd;
-    white-space:nowrap;
+
+    overflow-wrap:anywhere;
+}
+
+/* KHUSUS KETERANGAN */
+
+td:nth-child(3){
+    white-space:normal;
+    word-break:break-word;
 }
 
 tr:hover{
@@ -211,6 +301,10 @@ td[colspan="6"]{
     padding:20px;
     color:#777;
 }
+
+/* =========================
+   WARNA TRANSAKSI
+========================= */
 
 .pemasukan-text{
     color:#16a34a;
@@ -223,13 +317,15 @@ td[colspan="6"]{
 }
 
 /* =========================
-   LOGIN BUTTON HEADER
+   LOGIN BUTTON
 ========================= */
 
 .login-button{
     position:absolute;
+
     right:20px;
     top:50%;
+
     transform:translateY(-50%);
 
     width:auto;
@@ -283,16 +379,21 @@ td[colspan="6"]{
     border-radius:18px;
 
     box-shadow:0 15px 40px rgba(0,0,0,.2);
+
+    animation:loginMuncul .2s ease;
 }
 
 .login-box h2{
-    margin-bottom:5px;
+    margin:0 0 5px;
+
     font-size:22px;
 }
 
 .login-box p{
     color:#777;
+
     font-size:14px;
+
     margin-bottom:20px;
 }
 
@@ -316,34 +417,74 @@ td[colspan="6"]{
     padding:14px;
 }
 
-/* TOMBOL X */
+/* =========================
+   TOMBOL CLOSE LOGIN
+========================= */
 
-.close-login{
-    position:absolute;
+.login-box .close-login{
+    position:absolute !important;
 
-    top:10px;
-    right:15px;
+    top:12px !important;
+    right:15px !important;
 
-    width:auto;
-    margin:0;
-    padding:0;
+    width:30px !important;
+    height:30px !important;
 
-    background:none;
-    color:#555;
+    margin:0 !important;
+    padding:0 !important;
 
-    font-size:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:transparent !important;
+
+    color:#777 !important;
+
+    border:none !important;
+    border-radius:50% !important;
+
+    font-size:24px !important;
+    line-height:1 !important;
+
+    cursor:pointer;
+
+    box-shadow:none !important;
+    transform:none !important;
 }
 
-.close-login:hover{
-    background:none;
-    color:#000;
+.login-box .close-login:hover{
+    background:#f3f3f3 !important;
+    color:#333 !important;
+
+    box-shadow:none !important;
+    transform:none !important;
 }
 
 /* =========================
-   RESPONSIVE
+   ANIMASI LOGIN
+========================= */
+
+@keyframes loginMuncul{
+
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* =========================
+   RESPONSIVE HP
 ========================= */
 
 @media(max-width:768px){
+
+    /* HEADER */
 
     header{
         padding:16px 10px;
@@ -354,24 +495,42 @@ td[colspan="6"]{
         padding-right:80px;
     }
 
+    /* CONTAINER */
+
     .container{
         width:94%;
         margin:20px auto;
+    }
+
+    /* SALDO */
+
+    .cards{
+        margin-bottom:20px;
     }
 
     .card{
         padding:20px;
     }
 
+    .card h3{
+        font-size:16px;
+    }
+
     .card h1{
         font-size:24px;
+    }
+
+    .saldo{
+        max-width:100%;
     }
 
     /* LOGIN HEADER */
 
     .login-button{
         right:10px;
+
         padding:7px 9px;
+
         font-size:11px;
     }
 
@@ -381,14 +540,23 @@ td[colspan="6"]{
         padding:18px;
     }
 
-    /* TABEL */
+    /* =====================
+       TABEL HP
+    ===================== */
 
     .table-box{
         width:100%;
         padding:15px;
+        margin-bottom:20px;
     }
 
     .table-header{
+        width:100%;
+
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-end;
+
         gap:8px;
     }
 
@@ -396,19 +564,30 @@ td[colspan="6"]{
         font-size:17px;
     }
 
-    /* FILTER TETAP KECIL */
+    /* FILTER TETAP DI UJUNG KANAN */
 
     .filter-box{
         width:100px;
+        margin-left:auto;
+        flex-shrink:0;
+    }
+
+    .filter-box label{
+        font-size:11px;
     }
 
     .filter-box select{
         width:100px;
+
         padding:6px 7px;
+
         font-size:11px;
     }
 
+    /* TABEL */
+
     table{
+        width:100%;
         font-size:11px;
     }
 
@@ -420,17 +599,33 @@ td[colspan="6"]{
         padding:7px 5px;
     }
 
+    /* KETERANGAN TETAP BISA TURUN */
+
+    td:nth-child(3){
+        white-space:normal;
+        word-break:break-word;
+    }
+
     /* LOGIN MODAL */
 
     .login-box{
         width:90%;
         max-width:360px;
+
         padding:25px;
+    }
+
+    .login-box h2{
+        font-size:20px;
+    }
+
+    .login-box p{
+        font-size:13px;
     }
 }
 
 /* =========================
-   HP KECIL
+   HP SANGAT KECIL
 ========================= */
 
 @media(max-width:400px){
@@ -456,6 +651,18 @@ td[colspan="6"]{
     .filter-box select{
         width:90px;
         font-size:10px;
+    }
+
+    table{
+        font-size:10px;
+    }
+
+    th{
+        padding:6px 4px;
+    }
+
+    td{
+        padding:6px 4px;
     }
 
     .login-box{

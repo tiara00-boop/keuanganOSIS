@@ -670,3 +670,171 @@ td[colspan="6"]{
         padding:22px;
     }
 }
+
+/* =================================
+   SKY BLUE + ANIMATED CLOUDS
+================================= */
+
+body{
+    background:
+        linear-gradient(
+            180deg,
+            #bfe9ff 0%,
+            #dff5ff 45%,
+            #f3fbff 100%
+        );
+
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* LAPISAN AWAN */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:200%;
+    height:100%;
+
+    pointer-events:none;
+
+    z-index:0;
+
+    opacity:.65;
+
+    background-image:
+        radial-gradient(
+            ellipse 55px 28px at 40px 80px,
+            rgba(255,255,255,.9) 0%,
+            rgba(255,255,255,.9) 55%,
+            transparent 57%
+        ),
+
+        radial-gradient(
+            ellipse 35px 22px at 85px 75px,
+            rgba(255,255,255,.9) 0%,
+            rgba(255,255,255,.9) 55%,
+            transparent 57%
+        ),
+
+        radial-gradient(
+            ellipse 45px 25px at 130px 85px,
+            rgba(255,255,255,.9) 0%,
+            rgba(255,255,255,.9) 55%,
+            transparent 57%
+        ),
+
+        radial-gradient(
+            ellipse 50px 25px at 260px 190px,
+            rgba(255,255,255,.7) 0%,
+            rgba(255,255,255,.7) 55%,
+            transparent 57%
+        ),
+
+        radial-gradient(
+            ellipse 35px 20px at 305px 185px,
+            rgba(255,255,255,.7) 0%,
+            rgba(255,255,255,.7) 55%,
+            transparent 57%
+        ),
+
+        radial-gradient(
+            ellipse 60px 30px at 480px 120px,
+            rgba(255,255,255,.8) 0%,
+            rgba(255,255,255,.8) 55%,
+            transparent 57%
+        ),
+
+        radial-gradient(
+            ellipse 40px 23px at 530px 115px,
+            rgba(255,255,255,.8) 0%,
+            rgba(255,255,255,.8) 55%,
+            transparent 57%
+        );
+
+    background-size:600px 330px;
+
+    animation:
+        awanBergerak
+        45s
+        linear
+        infinite;
+}
+
+/* SEMUA ISI WEB DI ATAS AWAN */
+
+header,
+.container{
+    position:relative;
+    z-index:1;
+}
+
+/* =================================
+   WARNA BIRU LANGIT
+================================= */
+
+header{
+    background:#55baf5;
+    box-shadow:
+        0 3px 12px rgba(70,160,220,.25);
+}
+
+.saldo{
+    border-left-color:#55baf5;
+}
+
+button{
+    background:#55baf5;
+}
+
+button:hover{
+    background:#42aeeF;
+    box-shadow:
+        0 5px 12px rgba(70,170,230,.3);
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#55baf5;
+
+    box-shadow:
+        0 0 0 3px rgba(85,186,245,.15);
+}
+
+/* HEADER LOGIN */
+
+.login-button{
+    color:#35a8ed;
+}
+
+/* TABEL */
+
+th{
+    background:#55baf5;
+}
+
+/* CLOSE LOGIN */
+
+.login-box .close-login:hover{
+    background:#eefaff !important;
+}
+
+/* =================================
+   ANIMASI AWAN
+================================= */
+
+@keyframes awanBergerak{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-600px);
+    }
+}

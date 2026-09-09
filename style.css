@@ -5,60 +5,268 @@
     font-family:"Poppins",sans-serif;
 }
 
-body{
-    background:#eef3ff;
-    color:#333;
+html{
+    overflow-x:hidden;
 }
 
-/* =========================
+body{
+    background:
+        linear-gradient(
+            180deg,
+            #a9ddfa 0%,
+            #cceeff 45%,
+            #eefaff 100%
+        );
+
+    color:#333;
+    min-height:100vh;
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* =================================
+   AWAN REALISTIS
+================================= */
+
+/*
+   Awan dibuat dari beberapa pseudo-element
+   berbentuk bulat dengan blur lembut sehingga
+   terlihat seperti kapas, bukan sekadar lingkaran.
+*/
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    pointer-events:none;
+    z-index:0;
+}
+
+/* LAPISAN AWAN UTAMA */
+
+body::before{
+    width:100%;
+    height:100%;
+
+    top:0;
+    left:0;
+
+    opacity:.78;
+
+    background-image:
+
+        /* Awan 1 */
+        radial-gradient(
+            ellipse 75px 38px at 8% 12%,
+            rgba(255,255,255,.95) 0%,
+            rgba(255,255,255,.90) 45%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 48px 48px at 12% 10%,
+            rgba(255,255,255,.95) 0%,
+            rgba(255,255,255,.90) 48%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 55px 42px at 17% 12%,
+            rgba(255,255,255,.9) 0%,
+            rgba(255,255,255,.85) 48%,
+            transparent 72%
+        ),
+
+        /* Awan 2 */
+        radial-gradient(
+            ellipse 90px 42px at 73% 19%,
+            rgba(255,255,255,.82) 0%,
+            rgba(255,255,255,.75) 48%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 55px 55px at 69% 17%,
+            rgba(255,255,255,.85) 0%,
+            rgba(255,255,255,.78) 48%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 60px 48px at 77% 17%,
+            rgba(255,255,255,.82) 0%,
+            rgba(255,255,255,.75) 48%,
+            transparent 72%
+        ),
+
+        /* Awan 3 */
+        radial-gradient(
+            ellipse 80px 35px at 36% 42%,
+            rgba(255,255,255,.62) 0%,
+            rgba(255,255,255,.55) 48%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 45px 45px at 32% 40%,
+            rgba(255,255,255,.65) 0%,
+            rgba(255,255,255,.58) 48%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 50px 42px at 40% 41%,
+            rgba(255,255,255,.62) 0%,
+            rgba(255,255,255,.55) 48%,
+            transparent 72%
+        ),
+
+        /* Awan 4 */
+        radial-gradient(
+            ellipse 75px 34px at 91% 55%,
+            rgba(255,255,255,.58) 0%,
+            rgba(255,255,255,.50) 48%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 43px 43px at 87% 53%,
+            rgba(255,255,255,.62) 0%,
+            rgba(255,255,255,.55) 48%,
+            transparent 72%
+        ),
+
+        /* Awan 5 */
+        radial-gradient(
+            ellipse 85px 36px at 13% 72%,
+            rgba(255,255,255,.55) 0%,
+            rgba(255,255,255,.48) 48%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 50px 45px at 9% 70%,
+            rgba(255,255,255,.58) 0%,
+            rgba(255,255,255,.50) 48%,
+            transparent 72%
+        );
+
+    filter:blur(1px);
+
+    animation:
+        awanGerakLembut
+        55s
+        linear
+        infinite;
+}
+
+/* LAPISAN AWAN TAMBAHAN */
+
+body::after{
+    width:120%;
+    height:120%;
+
+    top:-10%;
+    left:-10%;
+
+    opacity:.30;
+
+    background-image:
+
+        radial-gradient(
+            ellipse 65px 30px at 25% 25%,
+            white 0%,
+            rgba(255,255,255,.85) 45%,
+            transparent 70%
+        ),
+
+        radial-gradient(
+            ellipse 55px 28px at 58% 67%,
+            white 0%,
+            rgba(255,255,255,.75) 45%,
+            transparent 70%
+        ),
+
+        radial-gradient(
+            ellipse 70px 32px at 80% 82%,
+            white 0%,
+            rgba(255,255,255,.75) 45%,
+            transparent 70%
+        );
+
+    filter:blur(2px);
+
+    animation:
+        awanGerakLembut2
+        75s
+        linear
+        infinite;
+}
+
+/* =================================
    HEADER
-========================= */
+================================= */
 
 header{
     width:100%;
-    background:#eb7df5;
+
+    background:#55baf5;
     color:white;
+
     padding:20px;
+
     text-align:center;
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
+
+    box-shadow:
+        0 3px 12px rgba(70,160,220,.25);
+
     position:relative;
+    z-index:10;
 }
 
 header h2{
     font-size:24px;
 }
 
-/* =========================
+/* =================================
    CONTAINER
-========================= */
+================================= */
 
 .container{
     width:90%;
     max-width:1000px;
+
     margin:30px auto;
+
+    position:relative;
+    z-index:2;
 }
 
-/* =========================
+/* =================================
    SALDO
-========================= */
+================================= */
 
 .cards{
     display:flex;
     justify-content:center;
+
     margin-bottom:30px;
 }
 
 .card{
     background:white;
+
     border-radius:15px;
+
     padding:25px;
+
     text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-    transition:.2s;
+
+    box-shadow:
+        0 8px 20px rgba(40,120,170,.10);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .card:hover{
     transform:translateY(-3px);
+
+    box-shadow:
+        0 12px 25px rgba(40,120,170,.14);
 }
 
 .card h3{
@@ -73,23 +281,31 @@ header h2{
 .saldo{
     width:100%;
     max-width:400px;
-    border-left:8px solid #eb7df5;
+
+    border-left:8px solid #55baf5;
 }
 
-/* =========================
+/* =================================
    FORM TRANSAKSI
-========================= */
+================================= */
 
 .form-box{
     width:100%;
     max-width:1000px;
+
     margin:0 auto 30px;
 
     background:white;
+
     padding:25px;
+
     border-radius:15px;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    box-shadow:
+        0 8px 20px rgba(40,120,170,.10);
+
+    position:relative;
+    z-index:2;
 }
 
 .form-box h2{
@@ -98,8 +314,10 @@ header h2{
 
 label{
     display:block;
+
     margin-top:15px;
     margin-bottom:5px;
+
     font-weight:600;
 }
 
@@ -107,22 +325,28 @@ input,
 select,
 textarea{
     width:100%;
+
     padding:12px;
 
     border:1px solid #ccc;
     border-radius:10px;
 
     outline:none;
+
     font-size:15px;
 
-    transition:.2s;
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
-    border-color:#eb7df5;
-    box-shadow:0 0 0 3px rgba(235,125,245,.12);
+    border-color:#55baf5;
+
+    box-shadow:
+        0 0 0 3px rgba(85,186,245,.15);
 }
 
 textarea{
@@ -130,99 +354,171 @@ textarea{
     height:90px;
 }
 
+/* =================================
+   BUTTON
+================================= */
+
 button{
     width:100%;
+
     margin-top:20px;
     padding:14px;
 
     border:none;
     border-radius:10px;
 
-    background:#eb7df5;
+    background:#55baf5;
     color:white;
 
     font-size:16px;
+
     cursor:pointer;
 
-    transition:.2s;
+    transition:
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
 button:hover{
-    background:#eb7df5;
-    transform:translateY(-1px);
-    box-shadow:0 5px 12px rgba(235,125,245,.25);
+    background:#42aef0;
+
+    /*
+       Tidak memakai transform.
+       Jadi tombol tidak bergerak saat cursor masuk.
+    */
+
+    box-shadow:
+        0 5px 12px rgba(70,170,230,.30);
 }
 
 button:disabled{
     opacity:.7;
+
     cursor:not-allowed;
+
     transform:none;
 }
 
-/* =========================
+/* =================================
    TABEL TRANSAKSI
-========================= */
+================================= */
 
 .table-box{
     width:100%;
     max-width:1000px;
+
     margin:0 auto 30px;
 
     background:white;
+
     padding:20px;
 
     border-radius:15px;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    box-shadow:
+        0 8px 20px rgba(40,120,170,.10);
+
+    position:relative;
+    z-index:2;
 }
 
-/* HEADER TABEL */
+/* =================================
+   HEADER TABEL + FILTER
+================================= */
 
 .table-header{
     width:100%;
 
     display:flex;
+
     justify-content:space-between;
     align-items:flex-end;
 
     gap:15px;
+
     margin-bottom:15px;
 }
 
 .table-header h2{
     margin:0;
+
     font-size:20px;
 }
 
-/* =========================
+/* =================================
    FILTER BULAN
-========================= */
+================================= */
 
 .filter-box{
-    width:120px;
+    width:max-content;
+
+    min-width:120px;
+
     flex-shrink:0;
 }
 
 .filter-box label{
     margin:0 0 4px 0;
+
     font-size:12px;
     font-weight:600;
 }
 
 .filter-box select{
-    width:120px;
-    padding:7px 8px;
+    width:auto;
+    min-width:120px;
+
+    padding:7px 28px 7px 8px;
 
     font-size:12px;
+
+    border-radius:8px;
+
+    white-space:nowrap;
+}
+
+/*
+   Container filter mengikuti area tabel.
+*/
+
+.table-header{
+    min-width:100%;
+}
+
+/* =================================
+   TABLE SCROLL WRAPPER
+================================= */
+
+/*
+   Kalau HTML memiliki .table-scroll,
+   aturan ini langsung digunakan.
+
+   Kalau belum ada wrapper, aturan table
+   di bawah tetap menjaga tabel tidak
+   memaksa teks bertumpuk.
+*/
+
+.table-scroll{
+    width:100%;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    -webkit-overflow-scrolling:touch;
+
+    scrollbar-width:thin;
+
     border-radius:8px;
 }
 
-/* =========================
+/* =================================
    TABEL
-========================= */
+================================= */
 
 table{
     width:100%;
+
+    min-width:760px;
 
     border-collapse:collapse;
 
@@ -231,7 +527,9 @@ table{
     font-size:14px;
 }
 
-/* UKURAN KOLOM */
+/* =================================
+   UKURAN KOLOM
+================================= */
 
 table th:nth-child(1),
 table td:nth-child(1){
@@ -263,18 +561,24 @@ table td:nth-child(6){
     width:16%;
 }
 
-/* HEADER TABEL */
+/* =================================
+   HEADER TABEL
+================================= */
 
 th{
-    background:#eb7df5;
+    background:#55baf5;
     color:white;
 
     padding:12px 8px;
 
     white-space:nowrap;
+
+    text-align:center;
 }
 
-/* ISI TABEL */
+/* =================================
+   ISI TABEL
+================================= */
 
 td{
     padding:10px 8px;
@@ -283,42 +587,53 @@ td{
 
     border-bottom:1px solid #ddd;
 
-    overflow-wrap:anywhere;
+    /*
+       Jangan pecah kata sembarangan.
+    */
+    overflow-wrap:normal;
+
+    word-break:normal;
 }
 
-/* KHUSUS KETERANGAN */
+/* KETERANGAN */
 
 td:nth-child(3){
     white-space:normal;
-    word-break:break-word;
+
+    word-break:normal;
+
+    overflow-wrap:break-word;
 }
 
 tr:hover{
-    background:#f8f9ff;
+    background:#f8fbff;
 }
 
 td[colspan="6"]{
     padding:20px;
+
     color:#777;
 }
 
-/* =========================
+/* =================================
    WARNA TRANSAKSI
-========================= */
+================================= */
 
 .pemasukan-text{
     color:#16a34a;
+
     font-weight:600;
 }
 
 .pengeluaran-text{
     color:#dc2626;
+
     font-weight:600;
 }
 
-/* =========================
-   LOGIN BUTTON
-========================= */
+/* =================================
+   LOGIN BUTTON HEADER
+================================= */
 
 .login-button{
     position:absolute;
@@ -326,34 +641,55 @@ td[colspan="6"]{
     right:20px;
     top:50%;
 
+    /*
+       Posisi tengah hanya ditentukan di sini.
+       Hover TIDAK mengubah transform.
+    */
     transform:translateY(-50%);
 
     width:auto;
+
     margin:0;
 
     padding:10px 16px;
 
     background:white;
-    color:#eb7df5;
+
+    color:#35a8ed;
 
     font-size:14px;
     font-weight:600;
 
     border-radius:8px;
+
+    box-shadow:none;
+
+    transition:
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
 .login-button:hover{
-    background:#f8f9ff;
+    background:#f8fcff;
+
+    /*
+       Sengaja tidak ada transform.
+       Jadi tombol tetap di tempat.
+    */
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.10);
 }
 
-/* =========================
+/* =================================
    LOGIN MODAL
-========================= */
+================================= */
 
 .login-modal{
     display:none;
 
     position:fixed;
+
     inset:0;
 
     background:rgba(0,0,0,.45);
@@ -364,7 +700,9 @@ td[colspan="6"]{
     z-index:9999;
 }
 
-/* KOTAK LOGIN */
+/* =================================
+   LOGIN BOX
+================================= */
 
 .login-box{
     position:relative;
@@ -378,9 +716,11 @@ td[colspan="6"]{
 
     border-radius:18px;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.20);
 
-    animation:loginMuncul .2s ease;
+    animation:
+        loginMuncul .2s ease;
 }
 
 .login-box h2{
@@ -397,7 +737,9 @@ td[colspan="6"]{
     margin-bottom:20px;
 }
 
-/* INPUT LOGIN */
+/* =================================
+   INPUT LOGIN
+================================= */
 
 .login-box label{
     margin-top:15px;
@@ -406,20 +748,25 @@ td[colspan="6"]{
 
 .login-box input{
     width:100%;
+
     padding:12px;
 }
 
-/* TOMBOL LOGIN */
+/* =================================
+   TOMBOL LOGIN MODAL
+================================= */
 
 .login-box button{
     width:100%;
+
     margin-top:20px;
+
     padding:14px;
 }
 
-/* =========================
-   TOMBOL CLOSE LOGIN
-========================= */
+/* =================================
+   CLOSE LOGIN
+================================= */
 
 .login-box .close-login{
     position:absolute !important;
@@ -434,6 +781,7 @@ td[colspan="6"]{
     padding:0 !important;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -450,37 +798,261 @@ td[colspan="6"]{
     cursor:pointer;
 
     box-shadow:none !important;
+
     transform:none !important;
 }
 
 .login-box .close-login:hover{
-    background:#f3f3f3 !important;
+    background:#eefaff !important;
+
     color:#333 !important;
 
     box-shadow:none !important;
+
     transform:none !important;
 }
 
-/* =========================
+/* =================================
    ANIMASI LOGIN
-========================= */
+================================= */
 
 @keyframes loginMuncul{
 
     from{
         opacity:0;
+
         transform:scale(.96);
     }
 
     to{
         opacity:1;
+
         transform:scale(1);
     }
 }
 
-/* =========================
+/* =================================
+   LANGIT
+================================= */
+
+body{
+    background:
+        linear-gradient(
+            180deg,
+            #79c9f5 0%,
+            #aee2fa 38%,
+            #dff4ff 72%,
+            #f5fcff 100%
+        );
+
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* =================================
+   AWAN
+================================= */
+
+.clouds{
+    position:fixed;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+/* AWAN DASAR */
+
+.cloud{
+    position:absolute;
+
+    width:190px;
+    height:65px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.98),
+            rgba(255,255,255,.82)
+        );
+
+    border-radius:100px;
+
+    filter:blur(.3px);
+
+    opacity:.9;
+
+    box-shadow:
+        0 10px 20px rgba(255,255,255,.18);
+}
+
+/* GUMPALAN ATAS AWAN */
+
+.cloud::before,
+.cloud::after{
+    content:"";
+
+    position:absolute;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,1),
+            rgba(255,255,255,.82)
+        );
+
+    border-radius:50%;
+}
+
+/* Gumpalan kiri */
+
+.cloud::before{
+    width:85px;
+    height:85px;
+
+    left:25px;
+    bottom:12px;
+}
+
+/* Gumpalan kanan */
+
+.cloud::after{
+    width:105px;
+    height:105px;
+
+    right:25px;
+    bottom:8px;
+}
+
+/* =================================
+   POSISI AWAN
+================================= */
+
+.cloud:nth-child(1){
+    top:10%;
+    left:-230px;
+
+    transform:scale(1.25);
+
+    animation:
+        awanJalan1
+        42s
+        linear
+        infinite;
+}
+
+.cloud:nth-child(2){
+    top:25%;
+    left:-300px;
+
+    transform:scale(.95);
+
+    opacity:.7;
+
+    animation:
+        awanJalan2
+        55s
+        linear
+        infinite;
+}
+
+.cloud:nth-child(3){
+    top:45%;
+    left:-260px;
+
+    transform:scale(1.45);
+
+    opacity:.55;
+
+    animation:
+        awanJalan3
+        65s
+        linear
+        infinite;
+}
+
+.cloud:nth-child(4){
+    top:65%;
+    left:-250px;
+
+    transform:scale(1.1);
+
+    opacity:.45;
+
+    animation:
+        awanJalan4
+        50s
+        linear
+        infinite;
+}
+
+/* =================================
+   ANIMASI AWAN
+================================= */
+
+@keyframes awanJalan1{
+
+    0%{
+        left:-250px;
+    }
+
+    100%{
+        left:110%;
+    }
+}
+
+@keyframes awanJalan2{
+
+    0%{
+        left:-300px;
+    }
+
+    100%{
+        left:115%;
+    }
+}
+
+@keyframes awanJalan3{
+
+    0%{
+        left:-300px;
+    }
+
+    100%{
+        left:120%;
+    }
+}
+
+@keyframes awanJalan4{
+
+    0%{
+        left:-280px;
+    }
+
+    100%{
+        left:115%;
+    }
+}
+
+/* =================================
+   ISI WEB DI ATAS AWAN
+================================= */
+
+header,
+.container{
+    position:relative;
+    z-index:2;
+}
+
+/* =================================
    RESPONSIVE HP
-========================= */
+================================= */
 
 @media(max-width:768px){
 
@@ -492,6 +1064,7 @@ td[colspan="6"]{
 
     header h2{
         font-size:18px;
+
         padding-right:80px;
     }
 
@@ -499,6 +1072,7 @@ td[colspan="6"]{
 
     .container{
         width:94%;
+
         margin:20px auto;
     }
 
@@ -524,7 +1098,9 @@ td[colspan="6"]{
         max-width:100%;
     }
 
-    /* LOGIN HEADER */
+    /* =================================
+       LOGIN HEADER HP
+    ================================= */
 
     .login-button{
         right:10px;
@@ -532,43 +1108,76 @@ td[colspan="6"]{
         padding:7px 9px;
 
         font-size:11px;
+
+        /*
+           Tetap centre secara vertikal.
+           Hover tidak akan mengubah posisinya.
+        */
+        transform:translateY(-50%);
     }
 
-    /* FORM */
+    /* =================================
+       FORM
+    ================================= */
 
     .form-box{
         padding:18px;
     }
 
-    /* =====================
-       TABEL HP
-    ===================== */
+    /* =================================
+       TABLE BOX HP
+    ================================= */
 
     .table-box{
         width:100%;
+
         padding:15px;
+
         margin-bottom:20px;
+
+        /*
+           Penting:
+           Jangan biarkan table-box sendiri
+           memotong tabel.
+        */
+        overflow:visible;
     }
+
+    /* =================================
+       TABLE HEADER HP
+    ================================= */
 
     .table-header{
         width:100%;
 
         display:flex;
+
         justify-content:space-between;
+
         align-items:flex-end;
 
-        gap:8px;
+        gap:10px;
+
+        margin-bottom:12px;
     }
 
     .table-header h2{
         font-size:17px;
+
+        flex-shrink:0;
     }
 
-    /* FILTER TETAP DI UJUNG KANAN */
+    /* =================================
+       FILTER HP
+    ================================= */
 
     .filter-box{
-        width:100px;
+        width:max-content;
+
+        min-width:0;
+
         margin-left:auto;
+
         flex-shrink:0;
     }
 
@@ -577,39 +1186,85 @@ td[colspan="6"]{
     }
 
     .filter-box select{
-        width:100px;
+        width:auto;
 
-        padding:6px 7px;
+        min-width:100px;
+
+        padding:6px 24px 6px 7px;
 
         font-size:11px;
+
+        white-space:nowrap;
     }
 
-    /* TABEL */
+    /* =================================
+       TABLE HP
+    ================================= */
+
+    /*
+       Tabel sengaja lebih lebar daripada
+       layar HP.
+
+       User tinggal swipe kiri-kanan.
+       Tidak ada tulisan yang ditumpuk.
+    */
+
+    .table-scroll{
+        width:100%;
+
+        overflow-x:auto;
+        overflow-y:hidden;
+
+        -webkit-overflow-scrolling:touch;
+    }
 
     table{
-        width:100%;
+        width:760px;
+
+        min-width:760px;
+
         font-size:11px;
+
+        table-layout:fixed;
     }
 
     th{
-        padding:7px 5px;
+        padding:8px 6px;
+
+        white-space:nowrap;
     }
 
     td{
-        padding:7px 5px;
+        padding:8px 6px;
+
+        white-space:nowrap;
+
+        overflow-wrap:normal;
+
+        word-break:normal;
     }
 
-    /* KETERANGAN TETAP BISA TURUN */
+    /*
+       Keterangan boleh menggunakan
+       beberapa baris, tapi tidak memecah
+       kata secara aneh.
+    */
 
     td:nth-child(3){
         white-space:normal;
-        word-break:break-word;
+
+        word-break:normal;
+
+        overflow-wrap:break-word;
     }
 
-    /* LOGIN MODAL */
+    /* =================================
+       LOGIN MODAL HP
+    ================================= */
 
     .login-box{
         width:90%;
+
         max-width:360px;
 
         padding:25px;
@@ -624,217 +1279,83 @@ td[colspan="6"]{
     }
 }
 
-/* =========================
+/* =================================
    HP SANGAT KECIL
-========================= */
+================================= */
 
 @media(max-width:400px){
 
     header h2{
         font-size:16px;
+
         padding-right:70px;
     }
 
     .login-button{
         font-size:10px;
+
         padding:6px 8px;
+
+        transform:translateY(-50%);
+    }
+
+    .table-header{
+        gap:7px;
     }
 
     .table-header h2{
         font-size:15px;
     }
 
-    .filter-box{
-        width:90px;
-    }
-
     .filter-box select{
-        width:90px;
+        min-width:90px;
+
         font-size:10px;
     }
 
     table{
+        width:760px;
+
+        min-width:760px;
+
         font-size:10px;
     }
 
     th{
-        padding:6px 4px;
+        padding:7px 5px;
     }
 
     td{
-        padding:6px 4px;
+        padding:7px 5px;
     }
 
     .login-box{
         max-width:330px;
+
         padding:22px;
     }
 }
 
 /* =================================
-   SKY BLUE + ANIMATED CLOUDS
+   REDUCE MOTION
 ================================= */
 
-body{
-    background:
-        linear-gradient(
-            180deg,
-            #bfe9ff 0%,
-            #dff5ff 45%,
-            #f3fbff 100%
-        );
+/*
+   Untuk perangkat yang meminta animasi
+   dikurangi, awan tidak bergerak.
+*/
 
-    position:relative;
-    overflow-x:hidden;
-}
+@media(prefers-reduced-motion:reduce){
 
-/* LAPISAN AWAN */
-
-body::before{
-    content:"";
-
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:200%;
-    height:100%;
-
-    pointer-events:none;
-
-    z-index:0;
-
-    opacity:.65;
-
-    background-image:
-        radial-gradient(
-            ellipse 55px 28px at 40px 80px,
-            rgba(255,255,255,.9) 0%,
-            rgba(255,255,255,.9) 55%,
-            transparent 57%
-        ),
-
-        radial-gradient(
-            ellipse 35px 22px at 85px 75px,
-            rgba(255,255,255,.9) 0%,
-            rgba(255,255,255,.9) 55%,
-            transparent 57%
-        ),
-
-        radial-gradient(
-            ellipse 45px 25px at 130px 85px,
-            rgba(255,255,255,.9) 0%,
-            rgba(255,255,255,.9) 55%,
-            transparent 57%
-        ),
-
-        radial-gradient(
-            ellipse 50px 25px at 260px 190px,
-            rgba(255,255,255,.7) 0%,
-            rgba(255,255,255,.7) 55%,
-            transparent 57%
-        ),
-
-        radial-gradient(
-            ellipse 35px 20px at 305px 185px,
-            rgba(255,255,255,.7) 0%,
-            rgba(255,255,255,.7) 55%,
-            transparent 57%
-        ),
-
-        radial-gradient(
-            ellipse 60px 30px at 480px 120px,
-            rgba(255,255,255,.8) 0%,
-            rgba(255,255,255,.8) 55%,
-            transparent 57%
-        ),
-
-        radial-gradient(
-            ellipse 40px 23px at 530px 115px,
-            rgba(255,255,255,.8) 0%,
-            rgba(255,255,255,.8) 55%,
-            transparent 57%
-        );
-
-    background-size:600px 330px;
-
-    animation:
-        awanBergerak
-        45s
-        linear
-        infinite;
-}
-
-/* SEMUA ISI WEB DI ATAS AWAN */
-
-header,
-.container{
-    position:relative;
-    z-index:1;
-}
-
-/* =================================
-   WARNA BIRU LANGIT
-================================= */
-
-header{
-    background:#55baf5;
-    box-shadow:
-        0 3px 12px rgba(70,160,220,.25);
-}
-
-.saldo{
-    border-left-color:#55baf5;
-}
-
-button{
-    background:#55baf5;
-}
-
-button:hover{
-    background:#42aeeF;
-    box-shadow:
-        0 5px 12px rgba(70,170,230,.3);
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#55baf5;
-
-    box-shadow:
-        0 0 0 3px rgba(85,186,245,.15);
-}
-
-/* HEADER LOGIN */
-
-.login-button{
-    color:#35a8ed;
-}
-
-/* TABEL */
-
-th{
-    background:#55baf5;
-}
-
-/* CLOSE LOGIN */
-
-.login-box .close-login:hover{
-    background:#eefaff !important;
-}
-
-/* =================================
-   ANIMASI AWAN
-================================= */
-
-@keyframes awanBergerak{
-
-    from{
-        transform:translateX(0);
+    body::before,
+    body::after{
+        animation:none;
     }
 
-    to{
-        transform:translateX(-600px);
+    *,
+    *::before,
+    *::after{
+        scroll-behavior:auto !important;
+        transition:none !important;
     }
 }

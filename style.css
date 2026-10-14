@@ -1,453 +1,678 @@
+/* =================================
+   1. RESET DASAR
+================================= */
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-:root {
-    --blue: #55baf5;
-    --blue-dark: #2799df;
-    --blue-light: #eaf7ff;
-    --text: #34495e;
-    --white: #ffffff;
-    --shadow: 0 5px 18px rgba(63, 137, 180, 0.12);
-}
-
-body {
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    color: var(--text);
-    background: linear-gradient(180deg, #79c9f5 0%, #e6f7ff 45%, #f8fcff 100%);
+html {
     overflow-x: hidden;
 }
 
-/* =========================================
-   2. AWAN
-========================================= */
+body {
+    background: linear-gradient(
+        180deg,
+        #79c9f5 0%,
+        #aee2fa 38%,
+        #dff4ff 72%,
+        #f5fcff 100%
+    );
+    color: #333;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* =================================
+   2. AWAN REALISTIS LATAR BELAKANG
+================================= */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::before {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: .78;
+
+    background-image:
+        radial-gradient(ellipse 75px 38px at 8% 12%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.90) 45%, transparent 72%),
+        radial-gradient(ellipse 48px 48px at 12% 10%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.90) 48%, transparent 72%),
+        radial-gradient(ellipse 55px 42px at 17% 12%, rgba(255,255,255,.9) 0%, rgba(255,255,255,.85) 48%, transparent 72%),
+
+        radial-gradient(ellipse 90px 42px at 73% 19%, rgba(255,255,255,.82) 0%, rgba(255,255,255,.75) 48%, transparent 72%),
+        radial-gradient(ellipse 55px 55px at 69% 17%, rgba(255,255,255,.85) 0%, rgba(255,255,255,.78) 48%, transparent 72%),
+        radial-gradient(ellipse 60px 48px at 77% 17%, rgba(255,255,255,.82) 0%, rgba(255,255,255,.75) 48%, transparent 72%),
+
+        radial-gradient(ellipse 80px 35px at 36% 42%, rgba(255,255,255,.62) 0%, rgba(255,255,255,.55) 48%, transparent 72%),
+        radial-gradient(ellipse 45px 45px at 32% 40%, rgba(255,255,255,.65) 0%, rgba(255,255,255,.58) 48%, transparent 72%),
+        radial-gradient(ellipse 50px 42px at 40% 41%, rgba(255,255,255,.62) 0%, rgba(255,255,255,.55) 48%, transparent 72%),
+
+        radial-gradient(ellipse 75px 34px at 91% 55%, rgba(255,255,255,.58) 0%, rgba(255,255,255,.50) 48%, transparent 72%),
+        radial-gradient(ellipse 43px 43px at 87% 53%, rgba(255,255,255,.62) 0%, rgba(255,255,255,.55) 48%, transparent 72%),
+
+        radial-gradient(ellipse 85px 36px at 13% 72%, rgba(255,255,255,.55) 0%, rgba(255,255,255,.48) 48%, transparent 72%),
+        radial-gradient(ellipse 50px 45px at 9% 70%, rgba(255,255,255,.58) 0%, rgba(255,255,255,.50) 48%, transparent 72%);
+
+    filter: blur(1px);
+    animation: awanGerakLembut 55s linear infinite;
+}
+
+body::after {
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
+    opacity: .30;
+
+    background-image:
+        radial-gradient(ellipse 65px 30px at 25% 25%, white 0%, rgba(255,255,255,.85) 45%, transparent 70%),
+        radial-gradient(ellipse 55px 28px at 58% 67%, white 0%, rgba(255,255,255,.75) 45%, transparent 70%),
+        radial-gradient(ellipse 70px 32px at 80% 82%, white 0%, rgba(255,255,255,.75) 45%, transparent 70%);
+
+    filter: blur(2px);
+    animation: awanGerakLembut2 75s linear infinite;
+}
+
+@keyframes awanGerakLembut {
+    0% { background-position: 0 0; }
+    50% { background-position: 25px 12px; }
+    100% { background-position: 0 0; }
+}
+
+@keyframes awanGerakLembut2 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+}
+
+/* =================================
+   3. HEADER
+================================= */
+
+header {
+    width: 100%;
+    background: #55baf5;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(70,160,220,.25);
+    position: relative;
+    z-index: 10;
+}
+
+header h2 {
+    font-size: 24px;
+}
+
+/* =================================
+   4. CONTAINER
+================================= */
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* =================================
+   5. KARTU SALDO
+================================= */
+
+.cards {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(40,120,170,.10);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(40,120,170,.14);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.card h1 {
+    font-size: 30px;
+}
+
+.saldo {
+    width: 100%;
+    max-width: 400px;
+    border-left: 8px solid #55baf5;
+}
+
+/* =================================
+   6. FORM TRANSAKSI
+================================= */
+
+.form-box {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(40,120,170,.10);
+    position: relative;
+    z-index: 2;
+}
+
+.form-box h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #55baf5;
+    box-shadow: 0 0 0 3px rgba(85,186,245,.15);
+}
+
+textarea {
+    resize: none;
+    height: 90px;
+}
+
+/* =================================
+   7. BUTTON UMUM
+================================= */
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #55baf5;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background .2s ease, box-shadow .2s ease;
+}
+
+button:hover {
+    background: #42aef0;
+    box-shadow: 0 5px 12px rgba(70,170,230,.30);
+}
+
+button:disabled {
+    opacity: .7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* =================================
+   8. TABEL TRANSAKSI
+================================= */
+
+.table-box {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(40,120,170,.10);
+    position: relative;
+    z-index: 2;
+}
+
+/* =================================
+   9. HEADER TABEL
+================================= */
+
+.table-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.table-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+/* =================================
+   10. FILTER BULAN
+================================= */
+
+.filter-box {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: max-content;
+    min-width: 210px;
+    flex-shrink: 0;
+}
+
+.filter-box label {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #52758e;
+    letter-spacing: .4px;
+}
+
+.filter-box select,
+#filterBulan {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #c8e2f2;
+    border-radius: 12px;
+    background-color: #f5fbff;
+    color: #28536f;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 3px 8px rgba(76,148,190,.08);
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.filter-box select:hover,
+#filterBulan:hover {
+    border-color: #83c8ed;
+    background-color: #fff;
+}
+
+.filter-box select:focus,
+#filterBulan:focus {
+    border-color: #58b7eb;
+    box-shadow: 0 0 0 3px rgba(88,183,235,.18);
+}
+
+#filterBulan option {
+    background-color: white;
+    color: #28536f;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+}
+
+/* =================================
+   11. TABLE SCROLL
+================================= */
+
+.table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: thin;
+    border-radius: 8px;
+}
+
+/* =================================
+   12. TABEL
+================================= */
+
+table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 14px;
+}
+
+table th:nth-child(1),
+table td:nth-child(1) {
+    width: 6%;
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+    width: 16%;
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+    width: 28%;
+}
+
+table th:nth-child(4),
+table td:nth-child(4) {
+    width: 17%;
+}
+
+table th:nth-child(5),
+table td:nth-child(5) {
+    width: 17%;
+}
+
+table th:nth-child(6),
+table td:nth-child(6) {
+    width: 16%;
+}
+
+th {
+    background: #55baf5;
+    color: white;
+    padding: 12px 8px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+td {
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+td:nth-child(3) {
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+tr:hover {
+    background: #f8fbff;
+}
+
+td[colspan="6"] {
+    padding: 20px;
+    color: #777;
+}
+
+/* =================================
+   13. WARNA TRANSAKSI
+================================= */
+
+.pemasukan-text {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.pengeluaran-text {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* =================================
+   14. LOGIN BUTTON HEADER
+================================= */
+
+.login-button {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    margin: 0;
+    padding: 10px 16px;
+    background: white;
+    color: #35a8ed;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: none;
+    transition: background .2s ease, box-shadow .2s ease;
+}
+
+.login-button:hover {
+    background: #f8fcff;
+    box-shadow: 0 4px 10px rgba(0,0,0,.10);
+}
+
+/* =================================
+   15. LOGIN MODAL
+================================= */
+
+.login-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.login-box {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.20);
+    animation: loginMuncul .2s ease;
+}
+
+.login-box h2 {
+    margin: 0 0 5px;
+    font-size: 22px;
+}
+
+.login-box p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.login-box label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+}
+
+.login-box button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+}
+
+.login-box .close-login {
+    position: absolute !important;
+    top: 12px !important;
+    right: 15px !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    color: #777 !important;
+    border: none !important;
+    border-radius: 50% !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+    cursor: pointer;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.login-box .close-login:hover {
+    background: #eefaff !important;
+    color: #333 !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+@keyframes loginMuncul {
+    from {
+        opacity: 0;
+        transform: scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =================================
+   16. AWAN BERGERAK
+================================= */
 
 .clouds {
     position: fixed;
     inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
 }
 
 .cloud {
     position: absolute;
-    width: 150px;
-    height: 45px;
-    background: rgba(255, 255, 255, 0.55);
-    border-radius: 50px;
-    animation: moveCloud 35s linear infinite;
+    width: 190px;
+    height: 65px;
+    background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.82));
+    border-radius: 100px;
+    filter: blur(.3px);
+    opacity: .9;
+    box-shadow: 0 10px 20px rgba(255,255,255,.18);
 }
 
 .cloud::before,
 .cloud::after {
     content: "";
     position: absolute;
-    background: inherit;
+    background: linear-gradient(180deg, rgba(255,255,255,1), rgba(255,255,255,.82));
     border-radius: 50%;
 }
 
 .cloud::before {
-    width: 60px;
-    height: 60px;
-    top: -28px;
-    left: 20px;
+    width: 85px;
+    height: 85px;
+    left: 25px;
+    bottom: 12px;
 }
 
 .cloud::after {
-    width: 75px;
-    height: 75px;
-    top: -38px;
-    right: 20px;
+    width: 105px;
+    height: 105px;
+    right: 25px;
+    bottom: 8px;
 }
 
 .cloud:nth-child(1) {
-    top: 12%;
-    left: -180px;
-    animation-duration: 40s;
+    top: 10%;
+    left: -230px;
+    transform: scale(1.25);
+    animation: awanJalan1 42s linear infinite;
 }
 
 .cloud:nth-child(2) {
-    top: 32%;
-    left: -180px;
-    opacity: 0.6;
-    animation-duration: 55s;
-    animation-delay: -15s;
+    top: 25%;
+    left: -300px;
+    transform: scale(.95);
+    opacity: .7;
+    animation: awanJalan2 55s linear infinite;
 }
 
 .cloud:nth-child(3) {
-    top: 55%;
-    left: -180px;
-    opacity: 0.4;
-    animation-duration: 48s;
-    animation-delay: -25s;
+    top: 45%;
+    left: -260px;
+    transform: scale(1.45);
+    opacity: .55;
+    animation: awanJalan3 65s linear infinite;
 }
 
 .cloud:nth-child(4) {
-    top: 75%;
-    left: -180px;
-    opacity: 0.5;
-    animation-duration: 60s;
-    animation-delay: -8s;
+    top: 65%;
+    left: -250px;
+    transform: scale(1.1);
+    opacity: .45;
+    animation: awanJalan4 50s linear infinite;
 }
 
-@keyframes moveCloud {
-    from {
-        transform: translateX(-10vw);
-    }
-    to {
-        transform: translateX(120vw);
-    }
+@keyframes awanJalan1 {
+    0% { left: -250px; }
+    100% { left: 110%; }
 }
 
-/* =========================================
-   3. HEADER
-========================================= */
+@keyframes awanJalan2 {
+    0% { left: -300px; }
+    100% { left: 115%; }
+}
 
-header {
+@keyframes awanJalan3 {
+    0% { left: -300px; }
+    100% { left: 120%; }
+}
+
+@keyframes awanJalan4 {
+    0% { left: -280px; }
+    100% { left: 115%; }
+}
+
+/* Konten berada di atas awan */
+
+header,
+.container {
     position: relative;
     z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 18px 6%;
-    background: rgba(85, 186, 245, 0.94);
-    box-shadow: 0 3px 12px rgba(40, 119, 166, 0.12);
 }
 
-header h1 {
-    color: var(--white);
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.login-button {
-    flex-shrink: 0;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 9px;
-    padding: 9px 17px;
-    background: var(--white);
-    color: var(--blue-dark);
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.login-button:hover {
-    background: #edf9ff;
-    transform: translateY(-1px);
-}
-
-/* =========================================
-   4. KONTEN UTAMA
-========================================= */
-
-.container {
-    width: min(1120px, 92%);
-    margin: 28px auto;
-}
-
-/* =========================================
-   5. KARTU SALDO
-========================================= */
-
-.cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 22px;
-}
-
-.card {
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 16px;
-    padding: 22px;
-    background: rgba(255, 255, 255, 0.94);
-    box-shadow: var(--shadow);
-}
-
-.card.saldo {
-    background: linear-gradient(135deg, #ffffff, #eaf7ff);
-    border-left: 5px solid var(--blue);
-}
-
-.card h2 {
-    margin-bottom: 8px;
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.card p,
-.card h3 {
-    overflow-wrap: anywhere;
-}
-
-.card.saldo p {
-    color: var(--blue-dark);
-    font-size: clamp(23px, 4vw, 32px);
-    font-weight: 700;
-}
-
-/* =========================================
-   6. FORM TRANSAKSI
-========================================= */
-
-#formTransaksiBox {
-    margin-bottom: 22px;
-}
-
-#formTransaksiBox h2 {
-    margin-bottom: 15px;
-    font-size: 19px;
-}
-
-#formKeuangan {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.94);
-    box-shadow: var(--shadow);
-}
-
-#formKeuangan label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-#formKeuangan input,
-#formKeuangan select {
-    width: 100%;
-    min-width: 0;
-    padding: 11px 12px;
-    border: 1px solid #d6e8f4;
-    border-radius: 8px;
-    outline: none;
-    background: #fbfdff;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 13px;
-}
-
-#formKeuangan input:focus,
-#formKeuangan select:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(85, 186, 245, 0.12);
-}
-
-#submitButton {
-    grid-column: 1 / -1;
-    width: fit-content;
-    border: none;
-    border-radius: 8px;
-    padding: 11px 22px;
-    background: var(--blue);
-    color: white;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-#submitButton:hover {
-    background: var(--blue-dark);
-}
-
-/* =========================================
-   7. KOTAK TABEL
-========================================= */
-
-.table-box {
-    min-width: 0;
-    margin-bottom: 20px;
-    padding: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: var(--shadow);
-}
-
-.table-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-.table-header h2 {
-    font-size: 17px;
-}
-
-/* =========================================
-   8. FILTER BULAN
-========================================= */
-
-.filter-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.filter-box label {
-    font-size: 12px;
-    font-weight: 500;
-}
-
-#filterBulan {
-    max-width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #d6e8f4;
-    border-radius: 8px;
-    outline: none;
-    background: #f8fcff;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 12px;
-}
-
-/* =========================================
-   9. TABEL RIWAYAT TRANSAKSI
-========================================= */
-
-.table-scroll {
-    width: 100%;
-    overflow-x: auto;
-    border-radius: 8px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.table-scroll table {
-    width: 100%;
-    min-width: 650px;
-    border-collapse: collapse;
-    font-size: 12px;
-}
-
-.table-scroll th,
-.table-scroll td {
-    padding: 12px 13px;
-    border-bottom: 1px solid #e9f1f7;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.table-scroll th {
-    background: #eaf7ff;
-    color: #287eae;
-    font-weight: 600;
-}
-
-.table-scroll tbody tr:hover {
-    background: #f7fcff;
-}
-
-.table-scroll tbody tr:last-child td {
-    border-bottom: none;
-}
-
-/* =========================================
-   10. MODAL LOGIN
-========================================= */
-
-#loginModal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(37, 72, 95, 0.45);
-    backdrop-filter: blur(4px);
-}
-
-.login-box {
-    position: relative;
-    width: min(380px, 100%);
-    padding: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 17px;
-    background: white;
-    box-shadow: 0 12px 40px rgba(34, 92, 128, 0.2);
-}
-
-.login-box h2 {
-    margin-bottom: 20px;
-    color: var(--blue-dark);
-    font-size: 21px;
-    text-align: center;
-}
-
-.close-login {
-    position: absolute;
-    top: 10px;
-    right: 14px;
-    border: none;
-    background: transparent;
-    color: #8095a3;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-#loginForm {
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-}
-
-#loginForm input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #d6e8f4;
-    border-radius: 8px;
-    outline: none;
-    font-family: inherit;
-    font-size: 13px;
-}
-
-#loginForm input:focus {
-    border-color: var(--blue);
-}
-
-#loginForm button {
-    margin-top: 4px;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background: var(--blue);
-    color: white;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-#loginForm button:hover {
-    background: var(--blue-dark);
-}
-
-/* =========================================
-   11. RINGKASAN PEMASUKAN & PENGELUARAN
-   Kecil, sederhana, tanpa ikon
-========================================= */
+/* =================================
+   17. RINGKASAN KEUANGAN
+   PERUBAHAN DESAIN HANYA DI BAGIAN INI
+================================= */
 
 .ringkasan-keuangan {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 10px;
     width: 100%;
     margin: 14px 0 20px;
 }
@@ -455,150 +680,252 @@ header h1 {
 .ringkasan-card {
     display: flex;
     align-items: center;
+    gap: 0;
     min-width: 0;
-    padding: 12px 15px;
+    padding: 12px 14px;
     border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(50, 90, 120, 0.05);
+    box-sizing: border-box;
+    box-shadow: 0 5px 16px rgba(50,90,120,.06);
 }
 
 .card-pemasukan {
-    background: #f0faf3;
-    border: 1px solid #d6efde;
+    background: #e8f8ee;
+    border: 1px solid #c9ecd5;
     color: #197344;
 }
 
 .card-pengeluaran {
-    background: #fff5f5;
-    border: 1px solid #f4dddd;
+    background: #fff0f0;
+    border: 1px solid #f5d2d2;
     color: #bb3943;
 }
 
-/* Ikon tidak digunakan */
+/* Ikon disembunyikan */
+
 .ringkasan-icon {
     display: none;
 }
 
 .ringkasan-info {
-    min-width: 0;
     width: 100%;
+    min-width: 0;
 }
 
 .ringkasan-info p {
-    margin: 0 0 4px;
+    margin: 0 0 5px;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
+    line-height: 1.5;
 }
 
 .ringkasan-info h3 {
     margin: 0;
-    font-size: 17px;
-    font-weight: 600;
+    font-size: 16px;
     line-height: 1.4;
     overflow-wrap: anywhere;
 }
 
-/* =========================================
-   12. RESPONSIVE TABLET & HP
-========================================= */
+/* =================================
+   18. RESPONSIVE HP
+================================= */
 
 @media (max-width: 768px) {
+
     header {
-        padding: 15px 4%;
+        padding: 16px 10px;
     }
 
-    header h1 {
-        font-size: 16px;
-        line-height: 1.4;
-    }
-
-    .login-button {
-        padding: 8px 11px;
-        font-size: 11px;
+    header h2 {
+        font-size: 18px;
+        padding-right: 80px;
     }
 
     .container {
         width: 94%;
-        margin: 18px auto;
+        margin: 20px auto;
+    }
+
+    .cards {
+        margin-bottom: 20px;
     }
 
     .card {
-        padding: 17px;
+        padding: 20px;
     }
 
-    #formKeuangan {
-        gap: 11px;
-        padding: 15px;
+    .card h3 {
+        font-size: 16px;
     }
 
-    #formKeuangan input,
-    #formKeuangan select {
-        padding: 10px;
-        font-size: 12px;
+    .card h1 {
+        font-size: 24px;
+    }
+
+    .saldo {
+        max-width: 100%;
+    }
+
+    .login-button {
+        right: 10px;
+        padding: 7px 9px;
+        font-size: 11px;
+        transform: translateY(-50%);
+    }
+
+    .form-box {
+        padding: 18px;
     }
 
     .table-box {
-        padding: 13px;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        overflow: visible;
+    }
+
+    .table-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .table-header h2 {
+        font-size: 17px;
+        flex-shrink: 0;
+    }
+
+    .filter-box {
+        width: max-content;
+        min-width: 0;
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+
+    .filter-box label {
+        font-size: 11px;
+    }
+
+    .filter-box select,
+    #filterBulan {
+        width: auto;
+        min-width: 100px;
+        padding: 7px 24px 7px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    .table-scroll {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+    }
+
+    table {
+        width: 760px;
+        min-width: 760px;
+        font-size: 11px;
+        table-layout: fixed;
+    }
+
+    th,
+    td {
+        padding: 8px 6px;
+    }
+
+    td:nth-child(3) {
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .login-box {
+        width: 90%;
+        max-width: 360px;
+        padding: 25px;
+    }
+
+    .login-box h2 {
+        font-size: 20px;
+    }
+
+    .login-box p {
+        font-size: 13px;
+    }
+
+    /* Ringkasan dibuat ringkas di HP */
+
+    .ringkasan-keuangan {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin: 12px 0 18px;
+    }
+
+    .ringkasan-card {
+        flex-direction: row;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .ringkasan-info p {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .ringkasan-info h3 {
+        font-size: 13px;
+    }
+}
+
+/* =================================
+   19. HP SANGAT KECIL
+================================= */
+
+@media (max-width: 400px) {
+
+    header h2 {
+        font-size: 16px;
+        padding-right: 70px;
+    }
+
+    .login-button {
+        font-size: 10px;
+        padding: 6px 8px;
+        transform: translateY(-50%);
+    }
+
+    .table-header {
+        gap: 7px;
     }
 
     .table-header h2 {
         font-size: 15px;
     }
 
-    .filter-box {
-        width: 100%;
-        justify-content: space-between;
-    }
-
+    .filter-box select,
     #filterBulan {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .table-scroll th,
-    .table-scroll td {
-        padding: 10px;
-    }
-
-    /* Ringkasan lebih kecil di HP */
-    .ringkasan-keuangan {
-        gap: 8px;
-        margin: 12px 0 16px;
-    }
-
-    .ringkasan-card {
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    .ringkasan-info p {
+        min-width: 90px;
         font-size: 10px;
     }
 
-    .ringkasan-info h3 {
-        font-size: 13px;
+    table {
+        width: 760px;
+        min-width: 760px;
+        font-size: 10px;
+    }
+
+    th,
+    td {
+        padding: 7px 5px;
     }
 
     .login-box {
-        padding: 25px 20px;
-    }
-}
-
-/* =========================================
-   13. HP KECIL
-========================================= */
-
-@media (max-width: 380px) {
-    header h1 {
-        font-size: 14px;
-    }
-
-    #formKeuangan {
-        grid-template-columns: 1fr;
-    }
-
-    #submitButton {
-        grid-column: auto;
-        width: 100%;
+        max-width: 330px;
+        padding: 22px;
     }
 
     .ringkasan-keuangan {
@@ -606,7 +933,7 @@ header h1 {
     }
 
     .ringkasan-card {
-        padding: 8px;
+        padding: 9px;
     }
 
     .ringkasan-info p {
@@ -615,5 +942,25 @@ header h1 {
 
     .ringkasan-info h3 {
         font-size: 12px;
+    }
+}
+
+/* =================================
+   20. AKSESIBILITAS ANIMASI
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    body::before,
+    body::after,
+    .cloud {
+        animation: none;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
     }
 }

@@ -1350,3 +1350,187 @@ header,
         transition:none !important;
     }
 }
+
+
+/* =========================
+   RINGKASAN KEUANGAN OSIS
+========================= */
+
+.ringkasan-keuangan {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+    margin: 18px 0 24px;
+}
+
+.ringkasan-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    padding: 20px;
+    border-radius: 18px;
+    box-sizing: border-box;
+    box-shadow: 0 5px 16px rgba(50, 90, 120, 0.08);
+}
+
+.card-pemasukan {
+    background: #e8f8ee;
+    border: 1px solid #c9ecd5;
+    color: #197344;
+}
+
+.card-pengeluaran {
+    background: #fff0f0;
+    border: 1px solid #f5d2d2;
+    color: #bb3943;
+}
+
+.ringkasan-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.75);
+    font-size: 20px;
+}
+
+.ringkasan-info {
+    min-width: 0;
+}
+
+.ringkasan-info p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ringkasan-info h3 {
+    margin: 0;
+    font-size: clamp(16px, 2vw, 24px);
+    overflow-wrap: anywhere;
+}
+
+/* Tampilan HP */
+@media (max-width: 480px) {
+    .ringkasan-keuangan {
+        gap: 10px;
+        margin: 14px 0 20px;
+    }
+
+    .ringkasan-card {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px 12px;
+        border-radius: 14px;
+    }
+
+    .ringkasan-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 11px;
+        font-size: 16px;
+    }
+
+    .ringkasan-info p {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .ringkasan-info h3 {
+        font-size: 16px;
+    }
+}
+
+/* =========================
+   FILTER BULAN - MODERN
+========================= */
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.table-header h2 {
+    margin: 0;
+}
+
+.filter-box {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 210px;
+}
+
+.filter-box label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #52758e;
+    letter-spacing: 0.4px;
+}
+
+#filterBulan {
+    width: 100%;
+    padding: 12px 38px 12px 14px;
+    border: 1px solid #c8e2f2;
+    border-radius: 12px;
+    background-color: #f5fbff;
+    color: #28536f;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 3px 8px rgba(76, 148, 190, 0.08);
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background-color 0.2s ease;
+}
+
+#filterBulan:hover {
+    border-color: #83c8ed;
+    background-color: #ffffff;
+}
+
+#filterBulan:focus {
+    border-color: #58b7eb;
+    box-shadow: 0 0 0 3px rgba(88, 183, 235, 0.18);
+}
+
+#filterBulan option {
+    background-color: #ffffff;
+    color: #28536f;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+
+/* Tampilan HP */
+@media (max-width: 600px) {
+    .table-header {
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    .table-header h2 {
+        font-size: 19px;
+    }
+
+    .filter-box {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #filterBulan {
+        padding: 12px;
+        font-size: 13px;
+    }
+}
